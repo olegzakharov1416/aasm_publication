@@ -15,7 +15,8 @@
           Обновлен: #{@post.updated_at.strftime('%d.%m.%Y %H:%M')}
     
     .post-actions
-      = link_to 'Редактировать', edit_post_path(@post), class: 'btn btn-outline-secondary'
+      - unless @post.deleted?
+        = link_to 'Редактировать', edit_post_path(@post), class: 'btn btn-outline-secondary'
       = link_to 'Назад к списку', posts_path, class: 'btn btn-secondary'
       
       - case @post.state

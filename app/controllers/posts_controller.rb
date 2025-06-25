@@ -38,6 +38,11 @@ class PostsController < ApplicationController
   end
 
   def verify_with_ai
+    unless @post.created?
+      redirect_to @post, alert: "Пост уже проверен или находится в другом состоянии."
+      return
+    end
+
     ai_service = AiVerificationService.new(@post)
     result = ai_service.verify
 
@@ -53,6 +58,11 @@ class PostsController < ApplicationController
   end
 
   def verify
+    unless @post.ai_verified?
+      redirect_to @post, alert: "Пост должен быть проверен ИИ перед ручной проверкой."
+      return
+    end
+
     if @post.verify!
       redirect_to @post, notice: "Пост проверен."
     else
@@ -61,6 +71,11 @@ class PostsController < ApplicationController
   end
 
   def publish
+    unless @post.verified?
+      redirect_to @post, alert: "Пост должен быть проверен перед публикацией."
+      return
+    end
+
     if @post.publish!
       redirect_to @post, notice: "Пост опубликован."
     else
@@ -69,6 +84,11 @@ class PostsController < ApplicationController
   end
 
   def delete
+    if @post.deleted?
+      redirect_to posts_url, alert: "Пост уже удален."
+      return
+    end
+
     if @post.delete!
       redirect_to posts_url, notice: "Пост удален."
     else
@@ -77,6 +97,11 @@ class PostsController < ApplicationController
   end
 
   def restore
+    unless @post.deleted?
+      redirect_to @post, alert: "Пост не удален."
+      return
+    end
+
     if @post.restore!
       redirect_to @post, notice: "Пост восстановлен."
     else
