@@ -1,0 +1,103 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-4o-mini","messages":[{"role":"system","content":"Ты модератор
+        контента. \n                        Пост должен не содержать спама, рекламы
+        или неприемлемого контента и соответствовать законам РФ и правилам российского
+        интернета.\n                        Проверь следующий текст на соответствие
+        законодательству Российской Федерации, включая:\n                        1.
+        Федеральные законы:\n                        № 149-ФЗ «Об информации, информационных
+        технологиях и о защите информации»\n                        № 114-ФЗ «О противодействии
+        экстремистской деятельности»\n                        № 436-ФЗ «О защите детей
+        от информации, причиняющей вред их здоровью и развитию»\n                        Закон
+        о фейках, дискредитации ВС РФ и «СВО»\n                        2. Требования
+        Роскомнадзора:\n                        Запрещённая информация: призывы к
+        насилию, самоубийству, распространение наркотиков, порнография, ЛГБТ-пропаганда,
+        фейки, оскорбления госсимволов, экстремизм.\n                        3. Упоминание
+        запрещённых в России ресурсов и организаций:\n                        Соцсети
+        и компании, признанные экстремистскими (например, Meta*, Facebook*, Instagram*)\n                        Сайты,
+        заблокированные в РФ (например, Navalny.com*, Ходорковский Live*, Tor, ProtonVPN
+        и пр.)\n                        Торрент-сайты, даркнет, инструкции по обходу
+        блокировок\n                        Формат ответа:\n                        Укажи,
+        есть ли нарушения.\n                        Если есть — процитируй проблемные
+        фрагменты, уточни, какие именно законы или нормы они нарушают.\n                        Если
+        нарушений нет — напиши: «Нарушений не выявлено».\n                        Дай
+        ответ в формате JSON: {\"approved\": true/false, \"reason\": \"причина одобрения
+        или отклонения развернуто\"}"},{"role":"user","content":"Заголовок: Inappropriate\n\nСодержание:
+        This content contains clearly inappropriate material."}],"temperature":0.3}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <OPENAI_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 25 Jun 2025 08:20:16 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Expose-Headers:
+      - X-Request-ID
+      Openai-Organization:
+      - collabushare
+      Openai-Processing-Ms:
+      - '1150'
+      Openai-Version:
+      - '2020-10-01'
+      X-Envoy-Upstream-Service-Time:
+      - '1171'
+      X-Ratelimit-Limit-Requests:
+      - '5000'
+      X-Ratelimit-Limit-Tokens:
+      - '4000000'
+      X-Ratelimit-Remaining-Requests:
+      - '4999'
+      X-Ratelimit-Remaining-Tokens:
+      - '3999286'
+      X-Ratelimit-Reset-Requests:
+      - 12ms
+      X-Ratelimit-Reset-Tokens:
+      - 10ms
+      X-Request-Id:
+      - req_1a270f966125d861958ba0ba64e24873
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=VhCd2uuFm420g0Fo5.sYIK8GyjKOuyhes1WOWhsz5WE-1750839616-1.0.1.1-QHmJAQx3RkhWKTfyaHwBnMaK7CJZwES3Uufibc8wzpnwGhjtZhrj0vb_Dle1qkT.bV1u7d55aEninL6uJM5SUeatlQisJ0rE4xWpnbQBRdQ;
+        path=/; expires=Wed, 25-Jun-25 08:50:16 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=1UfUH1nkO5lmj9fyOkkL0YPrkNnMaCw7QFp5sAz4X2E-1750839616971-0.0.1.1-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 95530b6abf46e4c9-AKX
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJjaGF0Y21wbC1CbUZlWm43THpMbmNnb2JodFlRclY4OFBLVnJobCIsCiAgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24iLAogICJjcmVhdGVkIjogMTc1MDgzOTYxNSwKICAibW9kZWwiOiAiZ3B0LTRvLW1pbmktMjAyNC0wNy0xOCIsCiAgImNob2ljZXMiOiBbCiAgICB7CiAgICAgICJpbmRleCI6IDAsCiAgICAgICJtZXNzYWdlIjogewogICAgICAgICJyb2xlIjogImFzc2lzdGFudCIsCiAgICAgICAgImNvbnRlbnQiOiAie1wiYXBwcm92ZWRcIjogZmFsc2UsIFwicmVhc29uXCI6IFwi0KHQvtC00LXRgNC20LDQvdC40LUg0YHQvtC00LXRgNC20LjRgiDRg9C60LDQt9Cw0L3QuNC1INC90LAg0L3QsNC70LjRh9C40LUg0L3QtdC/0YDQuNC10LzQu9C10LzQvtCz0L4g0LzQsNGC0LXRgNC40LDQu9CwLCDRh9GC0L4g0LzQvtC20LXRgiDQvdCw0YDRg9GI0LDRgtGMINC30LDQutC+0L0g0L4g0LfQsNGJ0LjRgtC1INC00LXRgtC10Lkg0L7RgiDQuNC90YTQvtGA0LzQsNGG0LjQuCwg0L/RgNC40YfQuNC90Y/RjtGJ0LXQuSDQstGA0LXQtCDQuNGFINC30LTQvtGA0L7QstGM0Y4g0Lgg0YDQsNC30LLQuNGC0LjRjiAoNDM2LdCk0JcpINC4INC00YDRg9Cz0LjQtSDQvdC+0YDQvNGLLCDQutCw0YHQsNGO0YnQuNC10YHRjyDQvdC10LTQvtC/0YPRgdGC0LjQvNC+0LPQviDQutC+0L3RgtC10L3RgtCwLlwifSIsCiAgICAgICAgInJlZnVzYWwiOiBudWxsLAogICAgICAgICJhbm5vdGF0aW9ucyI6IFtdCiAgICAgIH0sCiAgICAgICJsb2dwcm9icyI6IG51bGwsCiAgICAgICJmaW5pc2hfcmVhc29uIjogInN0b3AiCiAgICB9CiAgXSwKICAidXNhZ2UiOiB7CiAgICAicHJvbXB0X3Rva2VucyI6IDQyMSwKICAgICJjb21wbGV0aW9uX3Rva2VucyI6IDY0LAogICAgInRvdGFsX3Rva2VucyI6IDQ4NSwKICAgICJwcm9tcHRfdG9rZW5zX2RldGFpbHMiOiB7CiAgICAgICJjYWNoZWRfdG9rZW5zIjogMCwKICAgICAgImF1ZGlvX3Rva2VucyI6IDAKICAgIH0sCiAgICAiY29tcGxldGlvbl90b2tlbnNfZGV0YWlscyI6IHsKICAgICAgInJlYXNvbmluZ190b2tlbnMiOiAwLAogICAgICAiYXVkaW9fdG9rZW5zIjogMCwKICAgICAgImFjY2VwdGVkX3ByZWRpY3Rpb25fdG9rZW5zIjogMCwKICAgICAgInJlamVjdGVkX3ByZWRpY3Rpb25fdG9rZW5zIjogMAogICAgfQogIH0sCiAgInNlcnZpY2VfdGllciI6ICJkZWZhdWx0IiwKICAic3lzdGVtX2ZpbmdlcnByaW50IjogImZwXzM0YTU0YWU5M2MiCn0K
+  recorded_at: Wed, 25 Jun 2025 08:20:16 GMT
+recorded_with: VCR 6.3.1

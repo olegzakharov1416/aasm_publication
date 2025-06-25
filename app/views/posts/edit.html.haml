@@ -1,0 +1,7 @@
+.container
+  %h1 Редактировать пост
+  
+  = render 'form', post: @post
+  
+  = link_to 'Просмотр', @post, class: 'btn btn-secondary'
+  = link_to 'Назад к списку', posts_path, class: 'btn btn-secondary' 

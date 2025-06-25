@@ -1,0 +1,19 @@
+= form_with model: post, local: true do |form|
+  - if post.errors.any?
+    .alert.alert-danger
+      %h4 Ошибки:
+      %ul
+        - post.errors.full_messages.each do |message|
+          %li= message
+  
+  .mb-3
+    = form.label :title, 'Заголовок', class: 'form-label'
+    = form.text_field :title, class: 'form-control'
+  
+  .mb-3
+    = form.label :content, 'Содержание', class: 'form-label'
+    = form.text_area :content, rows: 10, class: 'form-control'
+  
+  .actions
+    = form.submit class: 'btn btn-primary'
+    = link_to 'Отмена', posts_path, class: 'btn btn-secondary' 

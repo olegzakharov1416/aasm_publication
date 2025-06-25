@@ -1,0 +1,6 @@
+.container
+  %h1 Создать новый пост
+  
+  = render 'form', post: @post
+  
+  = link_to 'Назад к списку', posts_path, class: 'btn btn-secondary' 

@@ -1,0 +1,34 @@
+.container
+  .post-detail
+    .d-flex.justify-content-between.align-items-start.mb-3
+      %h1= @post.title
+      .badge.bg-secondary= @post.state
+    
+    .post-content.mb-4
+      %p= @post.content
+    
+    .post-meta.mb-4
+      %small.text-muted
+        Создан: #{@post.created_at.strftime('%d.%m.%Y %H:%M')}
+        - if @post.updated_at != @post.created_at
+          %br
+          Обновлен: #{@post.updated_at.strftime('%d.%m.%Y %H:%M')}
+    
+    .post-actions
+      = link_to 'Редактировать', edit_post_path(@post), class: 'btn btn-outline-secondary'
+      = link_to 'Назад к списку', posts_path, class: 'btn btn-secondary'
+      
+      - case @post.state
+      - when 'created'
+        = button_to 'Проверить ИИ', verify_with_ai_post_path(@post), method: :patch, class: 'btn btn-outline-info'
+      - when 'ai_verified'
+        = button_to 'Проверить', verify_post_path(@post), method: :patch, class: 'btn btn-outline-warning'
+      - when 'verified'
+        = button_to 'Опубликовать', publish_post_path(@post), method: :patch, class: 'btn btn-outline-success'
+      - when 'published'
+        %span.badge.bg-success Опубликован
+      - when 'deleted'
+        = button_to 'Восстановить', restore_post_path(@post), method: :patch, class: 'btn btn-outline-warning'
+      
+      - unless @post.deleted?
+        = button_to 'Удалить', delete_post_path(@post), method: :patch, class: 'btn btn-outline-danger', data: { confirm: 'Вы уверены?' } 

@@ -1,0 +1,31 @@
+.container
+  %h1 Посты
+  = link_to 'Создать новый пост', new_post_path, class: 'btn btn-primary mb-3'
+  
+  - if @posts.any?
+    .posts-list
+      - @posts.each do |post|
+        .post.card.mb-3
+          .card-body
+            .d-flex.justify-content-between.align-items-start
+              %h5.card-title= post.title
+              .badge.bg-secondary= post.state
+            %p.card-text= truncate(post.content, length: 200)
+            .post-actions
+              = link_to 'Просмотр', post_path(post), class: 'btn btn-sm btn-outline-primary'
+              = link_to 'Редактировать', edit_post_path(post), class: 'btn btn-sm btn-outline-secondary'
+              
+              - case post.state
+              - when 'created'
+                = button_to 'Проверить ИИ', verify_with_ai_post_path(post), method: :patch, class: 'btn btn-sm btn-outline-info'
+              - when 'ai_verified'
+                = button_to 'Проверить', verify_post_path(post), method: :patch, class: 'btn btn-sm btn-outline-warning'
+              - when 'verified'
+                = button_to 'Опубликовать', publish_post_path(post), method: :patch, class: 'btn btn-sm btn-outline-success'
+              - when 'published'
+                %span.badge.bg-success Опубликован
+              
+              = button_to 'Удалить', delete_post_path(post), method: :patch, class: 'btn btn-sm btn-outline-danger', data: { confirm: 'Вы уверены?' }
+  - else
+    .alert.alert-info
+      %p Нет постов для отображения
