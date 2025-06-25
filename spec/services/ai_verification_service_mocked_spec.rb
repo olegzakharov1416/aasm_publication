@@ -134,4 +134,4 @@ RSpec.describe AiVerificationService, type: :service do
       end
     end
   end
-end 
+end

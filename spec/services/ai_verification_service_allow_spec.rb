@@ -255,4 +255,4 @@ RSpec.describe AiVerificationService, type: :service do
       expect(service.instance_variable_get(:@post)).to eq(post)
     end
   end
-end 
+end

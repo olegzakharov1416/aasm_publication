@@ -73,8 +73,8 @@ RSpec.describe Post, type: :model do
 
     describe 'delete' do
       it 'transitions from any state to deleted' do
-        states = [:created, :ai_verified, :verified, :published]
-        
+        states = [ :created, :ai_verified, :verified, :published ]
+
         states.each do |state|
           post = create(:post, state: state)
           post.delete!
@@ -94,8 +94,8 @@ RSpec.describe Post, type: :model do
 
     describe 'reset_to_created' do
       it 'transitions from verified states to created' do
-        states = [:ai_verified, :verified, :published]
-        
+        states = [ :ai_verified, :verified, :published ]
+
         states.each do |state|
           post = create(:post, state: state)
           post.reset_to_created!
@@ -151,4 +151,4 @@ RSpec.describe Post, type: :model do
       end
     end
   end
-end 
+end

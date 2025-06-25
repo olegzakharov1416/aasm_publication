@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AiVerificationService, type: :service do
   include WebMock::API
-  
+
   let(:post) { create(:post, title: 'Test Title', content: 'Test content') }
   let(:service) { described_class.new(post) }
 
@@ -11,15 +11,15 @@ RSpec.describe AiVerificationService, type: :service do
     config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
     config.hook_into :webmock
     config.configure_rspec_metadata!
-    
+
     # Фильтруем чувствительные данные
     config.filter_sensitive_data('<OPENAI_API_KEY>') { ENV['CHAT_GPT_TOKEN'] }
     config.filter_sensitive_data('<OPENAI_ORG_ID>') { ENV['OPENAI_ORG_ID'] }
-    
+
     # Настройки для записи кассет
     config.default_cassette_options = {
       record: :once,
-      match_requests_on: [:method, :uri, :body]
+      match_requests_on: [ :method, :uri, :body ]
     }
   end
 
@@ -207,7 +207,7 @@ RSpec.describe AiVerificationService, type: :service do
   describe 'API request structure' do
     it 'sends correct request format to OpenAI', vcr: { cassette_name: 'ai_verification/request_structure' } do
       service = described_class.new(post)
-      
+
       # VCR запишет реальный запрос
       result = service.verify
 
@@ -215,4 +215,4 @@ RSpec.describe AiVerificationService, type: :service do
       expect(result).to have_key(:message)
     end
   end
-end 
+end
